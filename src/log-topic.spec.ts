@@ -53,6 +53,22 @@ describe ('LogTopic', () => {
         expect(mockSubscriptionFunc).toBeCalledWith({ severity: 'FATAL', message: 'RIP' })
     })
 
+    it (`doesn't call the unsubscribed subscription`, () => {
+        // Mocks
+        let mockSubscriptionFunc = jest.fn()
+
+        // Init
+        let topic = new LogTopic()
+        topic.subscribe(mockSubscriptionFunc)
+        topic.unsubscribe(mockSubscriptionFunc)
+
+        // Act
+        topic.publish({ severity: 'FATAL', message: 'RIP' })
+
+        // Assert
+        expect(mockSubscriptionFunc).not.toBeCalled()
+    })
+
     it ('filters messages', () => {
         // Mocks
         let mockSubscriptionFunc = jest.fn()
