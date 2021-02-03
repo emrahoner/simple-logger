@@ -5,7 +5,7 @@ export interface LogWriterBase {
 export interface Log {
     severity: LogSeverity
     message: string
-    parameters: any[]
+    parameters?: any[]
 }
 
 export type LogSeverity = 'FATAL' | 'ERROR' | 'WARN' | 'INFO' | 'DEBUG' | 'TRACE'
